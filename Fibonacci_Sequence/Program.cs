@@ -7,61 +7,54 @@ namespace Fibonacci_Sequence
 {
     class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            
             CalculatingFibonacciSequence();
         }
 
         public static void CalculatingFibonacciSequence()
         {
-            var fib_list = new ArrayList();
+            var fibonacciList = new ArrayList();
             int fib1 = 1;
             int fib2 = 0;
-            int nth;
+            int fibonacciLimit;
             int i = 0;
 
             Console.WriteLine("Int Fibonacci limit:");
-            nth = Convert.ToInt32(Console.ReadLine());
+            fibonacciLimit = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine(" ");
 
-            while (i < nth)
+            while (i < fibonacciLimit)
             {
-                int fib_temp = fib1 + fib2;
+                int fibTemp = fib1 + fib2;
                 fib1 = fib2;
-                fib2 = fib_temp;
-                i = i + 1;
-                fib_list.Add(fib2);
+                fib2 = fibTemp;
+                i += 1;
+                fibonacciList.Add(fib2);
                 Console.WriteLine($"{fib2}");
             }
             Console.WriteLine(" ");
-            FibonacciSum(fib_list);
+            FibonacciSum(fibonacciList);
             
         }
 
-        public static void FibonacciSum(IEnumerable my_ist) 
+        public static void FibonacciSum(IEnumerable myList) 
         {
             int sum = 0;
-            foreach (int i in my_ist)
+            foreach (int i in myList)
             {
                 sum = sum + i;
-                SaveInFile(i);
+                SaveInFile("", i);
             }
             Console.WriteLine($"Fibonacci sum: {sum}");
-            SaveInFile(sum);
+            SaveInFile("Fibonacci sum: ", sum);
         }
 
-        public static void SaveInFile(int i)
+        public static void SaveInFile(string name, int text)
         {
             string path = @"C:\Users\Michael\source\repos\Fibonacci_Sequence\Fibonacci_Sequence\SaveForAsya.txt";
-            
-            if (!File.Exists(path))
-            {
-                string createText = i + Environment.NewLine;
-                File.WriteAllText(path, createText, Encoding.UTF8);
-            }
 
-            string appendText = i + Environment.NewLine;
+            string appendText = name + text + Environment.NewLine;
             File.AppendAllText(path, appendText, Encoding.UTF8);
         }
     }
